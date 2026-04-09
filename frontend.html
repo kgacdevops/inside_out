@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inside Out</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; text-align: center;}
+
+    .button-group {
+      display: flex;
+      flex-direction: row;
+      gap: 3.5rem;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .fetch-btn {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      padding: 0.6rem 0.6rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .fetch-btn:hover { background-color: #a3ccea62; }
+    .fetch-btn img { width: 250px; height: 300px; }
+
+    pre { background: #8db6d8; padding: 1rem; margin-top: 1rem; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1><center>How are you feeling today?</center></h1>
+  <br>
+  
+  <div class="button-group">
+    <button class="fetch-btn" onclick="fetchJoy()">
+        <img src="photos/joy.jpg" alt="happy" />
+    </button>
+    <button class="fetch-btn" onclick="fetchAnger()">
+        <img src="photos/anger.jpg" alt="anger" />
+    </button>
+    <button class="fetch-btn" onclick="fetchAnxiety()">
+        <img src="photos/anxiety.jpg" alt="anxiety" />
+    </button>
+    <button class="fetch-btn" onclick="fetchSadness()">
+        <img src="photos/sadness.jpg" alt="sadness" />
+    </button>
+  </div>
+  <br><br>
+  <pre id="output">Select the photo that best describes your mood today to receive your encouragement!</pre>
+
+  <script>
+    async function fetchJoy() {
+      const output = document.getElementById('output');
+      output.textContent = 'Loading...';
+      try {
+        const res = await fetch('https://YOUR_API_GATEWAY_URL/items');
+        const data = await res.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
