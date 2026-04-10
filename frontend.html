@@ -29,7 +29,18 @@
     .fetch-btn:hover { background-color: #dbe9f462; }
     .fetch-btn img { width: 250px; height: 300px; }
 
-    pre { background: #dbe3eb; padding: 1rem; margin-top: 1rem; border-radius: 6px; font-size: 1rem; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+    pre { 
+      background: #dbe3eb; 
+      padding: 1rem; 
+      margin-top: 1rem; 
+      border-radius: 6px; 
+      font-size: 1rem; 
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+      word-wrap: break-word; 
+      overflow-wrap: break-word; 
+      width: 100%; 
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -60,7 +71,7 @@
       try {
         const res = await fetch('https://zukkxtph89.execute-api.us-east-2.amazonaws.com/api/verses_backend?mood=' + mood);
         const data = await res.json();
-        output.textContent = "\"" + data.content + "\"\n\n" + data.reference
+        output.textContent = "YOU ARE " + mood.toUpperCase() + "\n\n\n\"" + data.content + "\"\n\n" + data.reference
       } catch (err) {
         output.textContent = 'No available verse'
       }
