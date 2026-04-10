@@ -26,43 +26,43 @@
       border-radius: 6px;
     }
 
-    .fetch-btn:hover { background-color: #a3ccea62; }
+    .fetch-btn:hover { background-color: #dbe9f462; }
     .fetch-btn img { width: 250px; height: 300px; }
 
-    pre { background: #8db6d8; padding: 1rem; margin-top: 1rem; border-radius: 6px; }
+    pre { background: #dbe3eb; padding: 1rem; margin-top: 1rem; border-radius: 6px; font-size: 1rem; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
   </style>
 </head>
 <body>
   <h1><center>How are you feeling today?</center></h1>
-  <br>
+  <br><br><br>
   
   <div class="button-group">
-    <button class="fetch-btn" onclick="fetchJoy()">
+    <button class="fetch-btn" onclick="fetchVerse('happy')">
         <img src="photos/joy.jpg" alt="happy" />
     </button>
-    <button class="fetch-btn" onclick="fetchAnger()">
+    <button class="fetch-btn" onclick="fetchVerse('angry')">
         <img src="photos/anger.jpg" alt="anger" />
     </button>
-    <button class="fetch-btn" onclick="fetchAnxiety()">
+    <button class="fetch-btn" onclick="fetchVerse('anxious')">
         <img src="photos/anxiety.jpg" alt="anxiety" />
     </button>
-    <button class="fetch-btn" onclick="fetchSadness()">
+    <button class="fetch-btn" onclick="fetchVerse('sad')">
         <img src="photos/sadness.jpg" alt="sadness" />
     </button>
   </div>
-  <br><br>
+  <br><br><br>
   <pre id="output">Select the photo that best describes your mood today to receive your encouragement!</pre>
 
   <script>
-    async function fetchJoy() {
+    async function fetchVerse(mood) {
       const output = document.getElementById('output');
       output.textContent = 'Loading...';
       try {
-        const res = await fetch('https://YOUR_API_GATEWAY_URL/items');
+        const res = await fetch('https://zukkxtph89.execute-api.us-east-2.amazonaws.com/api/verses_backend?mood=' + mood);
         const data = await res.json();
-        output.textContent = JSON.stringify(data, null, 2);
+        output.textContent = "\"" + data.content + "\"\n\n" + data.reference
       } catch (err) {
-        output.textContent = 'Error: ' + err.message;
+        output.textContent = 'No available verse'
       }
     }
   </script>
