@@ -1,0 +1,30 @@
+name: Build Website Infra - AWS
+run-name: build website infra - ${{ github.event.inputs.ACTION }}
+on:
+  workflow_dispatch:
+    inputs:
+      ACTION:
+        description: "Action"
+        type: choice
+        options:
+        - plan
+        - apply
+        - destroy
+      REGION:
+        description: "Region"
+        type: string
+        default: 'us-east-2'
+
+jobs:
+  build_aws_infra:
+    permissions:
+      id-token: write
+      contents: write
+      repository-projects: write
+      actions: write
+    uses: kgacdevops/cicd_inside_out/.github/workflows/build_site_infra.yml@main
+    secrets: inherit
+    with:
+      ACTION: ${{ github.event.inputs.ACTION }}
+      CLOUD_PROVIDER: 'aws'
+      REGION: ${{ github.event.inputs.REGION }}
