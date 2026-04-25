@@ -2,7 +2,7 @@ import json, boto3, random, urllib.request
 from boto3.dynamodb.conditions import Attr
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('verses_table')
+table = dynamodb.Table('insideout-verses-db')
 
 def get_verse(selected_verse):
     format_verse = selected_verse.replace(" ", "+").lower()
