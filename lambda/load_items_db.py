@@ -2,7 +2,7 @@ import boto3
 import json
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('verses_table')
+table = dynamodb.Table('insideout-verses-db')
 
 def lambda_handler(event, context):
     items = [
