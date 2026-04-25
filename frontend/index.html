@@ -69,7 +69,7 @@
       const output = document.getElementById('output');
       output.textContent = 'Loading...';
       try {
-        const res = await fetch('https://zukkxtph89.execute-api.us-east-2.amazonaws.com/api/verses_backend?mood=' + mood);
+        const res = await fetch('{API_ENDPOINT}/verses_backend?mood=' + mood);
         const data = await res.json();
         output.textContent = "YOU ARE " + mood.toUpperCase() + "\n\n\n\"" + data.content + "\"\n\n" + data.reference
       } catch (err) {
